@@ -22,22 +22,39 @@ class Board extends Component {
 
   componentDidMount() {
     axios.get(URL)
-      .then((response) => {
-        const cards = response.data.map((datum) => {
-          return datum.card
-        })
-        this.setState({
-          cards: cards
-        })
+    .then((response) => {
+      const cards = response.data.map((datum) => {
+        return datum.card
       })
-      .catch((error) => {
-        console.log(error.message);
-        this.setState({
-          error: error.message,
-          // add error messages buy mapping through check validations??
-        })
+      this.setState({
+        cards: cards
       })
-    }
+    })
+    .catch((error) => {
+      console.log(error.message);
+      this.setState({
+        error: error.message,
+        // add error messages buy mapping through check validations??
+      })
+    })
+  }
+
+  onAddCard = (newCard) => {
+    console.log(newCard);
+    console.log(URL);
+    axios.post(URL, newCard)
+    .then((response) => {
+      const addCard = response.data;
+      console.log(addCard)
+
+    })
+    .catch((error) => {
+      // What should we do when we know the post request failed?
+      this.setState({
+        errorMessage: `Failure ${error.message}`,
+      })
+    });
+  }
 
 
   render() {
@@ -49,7 +66,9 @@ class Board extends Component {
     return (
       <div>
         Board
+        <NewCardForm addCardCallback={this.onAddCard} />
         {cards}
+
       </div>
     )
   }

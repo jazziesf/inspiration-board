@@ -5,6 +5,7 @@ import { getUnicode } from 'emoji-dictionary';
 import './Card.css';
 
 class Card extends Component {
+  
   renderEmoji(emoji) {
     return <p className="card__content-emoji">{getUnicode(emoji)}</p>
   }
@@ -24,7 +25,7 @@ class Card extends Component {
       <div className="card">
         <div className="card__content">
           {text}
-        
+
           {icon}
 
         </div>

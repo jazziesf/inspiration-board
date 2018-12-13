@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import emoji from 'emoji-dictionary';
+import { getUnicode } from 'emoji-dictionary';
 import './NewCardForm.css';
 
 const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
@@ -11,6 +11,7 @@ class NewCardForm extends Component {
 
     this.state = {
       text: '',
+      emoji: EMOJI_LIST,
     };
   }
 
@@ -23,17 +24,31 @@ class NewCardForm extends Component {
     this.setState(updatedState);
   }
 
-  onSubmit = (event) => {
-    event.preventDefault();
-    const { text } = this.state;
-
-    if (text === '') return;
-
-    console.log(event);
-    this.props.addCardCallback(this.state);
+  resetState = () => {
     this.setState({
-      text: "",
+      text: '',
+      emoji: '',
     });
+  }
+
+
+  renderEmoji = () => {
+    return EMOJI_LIST.map((emoji, i) => {
+      console.log(getUnicode(emoji))
+      return <option value={emoji} key={i}>{getUnicode(emoji)}</option>
+    })
+  }
+
+  onSubmit = (event) => {
+
+    event.preventDefault();
+    const { text, emoji } = this.state;
+    console.log(event)
+
+    if ( text === '' ) return;
+    console.log()
+    this.props.addCardCallback(this.state);
+    this.resetState();
   }
 
   render() {
@@ -46,19 +61,22 @@ class NewCardForm extends Component {
         >
 
         <div>
-          <label className="new-card-form__form-select" htmlFor="Name">
-          Pick Your Emoji
-          <select multiple={true} value={emoji} />
-          </label>
+        <label>
+           Pick your Emoji:
+           <select className="new-card-form__form-select" name="emoji" value={this.state.emoji} onChange={this.onFormChange}>
+            {this.renderEmoji()}
+          </select>
+        </label>
         </div>
 
         <div>
-          <label className="new-card-form__form-label " htmlFor="about">Your Inspiration Quote</label>
-          <textarea className="new-card-form__form-textarea" name="about" onChange={this.onFormChange} value={this.state.about}>
+          <label className="new-card-form__form-label " htmlFor="text">Your Inspiration Quote
+          <textarea className="new-card-form__form-textarea" name="text" onChange={this.onFormChange} value={this.state.text}>
           </textarea>
+          </label>
         </div>
 
-        <input className="btn btn-success new-card-form__form-button" type="submit" name="submit" value="Add a Card" />
+        <input className="new-card-form__form-button" type="submit" name="submit" value="Add a Card" />
       </form>
     );
   }
@@ -67,7 +85,7 @@ class NewCardForm extends Component {
 }
 
 NewCardForm.propTypes = {
-  addCardCallback: PropTypes.func.isRequired
+  addCardCallback: PropTypes.func
 };
 
 export default NewCardForm;
