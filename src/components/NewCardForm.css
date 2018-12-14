@@ -3,12 +3,14 @@
 .new-card-form {
   width: 50%;
   margin: auto;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
 }
 
 .new-card-form__header {
   text-align: center;
+  font-family: 'Permanent Marker', Helvetica, sans-serif;
   text-transform: uppercase;
+  padding-bottom: 1em;
 }
 
 .new-card-form__form {
@@ -37,4 +39,29 @@
   background-color: inherit;
   border: 1px solid black;
   font-size: 1em;
+  border-radius: 50px;
+  font-family: 'Permanent Marker', Helvetica, sans-serif;
+  padding: .3em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.new-card-form__form-button:hover {
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+
+.new-card-form__form-select:hover {
+  cursor: pointer;
+}
+
+.card-grid {
+  display: inline-grid;
+  padding-left: 50px;
+}
+
+.submit {
+  padding-top: 1em;
+  text-align: center;
 }

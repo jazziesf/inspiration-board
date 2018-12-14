@@ -40,13 +40,38 @@ class Board extends Component {
   }
 
   onAddCard = (newCard) => {
-    console.log(newCard);
-    console.log(URL);
     axios.post(URL, newCard)
     .then((response) => {
-      const addCard = response.data;
-      console.log(addCard)
+      const addCard = response.data.card;
+      const cards = [addCard,...this.state.cards]
+      this.setState({
+        cards,
+      })
 
+
+    })
+    .catch((error) => {
+      // What should we do when we know the post request failed?
+      this.setState({
+        errorMessage: `Failure ${error.message}`,
+      })
+    });
+  }
+
+  onDeleteCallback = (id) => {
+    let url = `https://inspiration-board.herokuapp.com/cards/${id}`
+
+    console.log(url)
+    axios.delete(url)
+    .then((response) => {
+      console.log(response)
+
+      const cards = [...this.state.cards]
+
+      const deleteCard = cards.find((card) => card.id === id);
+      cards.splice(cards.indexOf(deleteCard), 1);
+
+      this.setState({cards});
     })
     .catch((error) => {
       // What should we do when we know the post request failed?
@@ -60,7 +85,7 @@ class Board extends Component {
   render() {
 
     const cards = this.state.cards.map((card, i) => {
-      return <Card key={i} text={card.text} emoji={card.emoji} />
+      return <Card key={i} id={card.id} text={card.text} emoji={card.emoji} onDeleteCallback={this.onDeleteCallback} />
     })
 
     return (
