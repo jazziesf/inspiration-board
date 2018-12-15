@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`inspiration card will match the inspirationCard Snapshot 1`] = `
+<div
+  className="card"
+>
+  <div
+    className="card__content"
+  >
+    <p
+      className="card__content-text"
+    >
+      hi
+    </p>
+  </div>
+  <div
+    className="card__delete"
+    onClick={[Function]}
+  >
+    X
+  </div>
+</div>
+`;
