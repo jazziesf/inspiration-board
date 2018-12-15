@@ -43,7 +43,7 @@ class Board extends Component {
     axios.post(URL, newCard)
     .then((response) => {
       const addCard = response.data.card;
-      const cards = [addCard,...this.state.cards]
+      const cards = [addCard, ...this.state.cards]
       this.setState({
         cards,
       })
@@ -90,7 +90,6 @@ class Board extends Component {
 
     return (
       <div>
-        Board
         <NewCardForm addCardCallback={this.onAddCard} />
         {cards}
 
@@ -101,7 +100,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-
+  url: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired,
 };
 
 export default Board;

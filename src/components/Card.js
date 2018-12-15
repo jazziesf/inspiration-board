@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { getUnicode } from 'emoji-dictionary';
-
 import './Card.css';
 
-URL =  `https://inspiration-board.herokuapp.com/cards/`
 
 class Card extends Component {
 
@@ -16,15 +13,6 @@ class Card extends Component {
   renderText(text) {
     return <p className="card__content-text">{text}</p>
   }
-
-  // onDeleteCallback = (id) => {
-  //   let url = URL + id
-  //   console.log(url)
-  //   axios.delete(url)
-  //     .then(response)
-  // }
-
-
 
 
   render() {

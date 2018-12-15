@@ -42,7 +42,7 @@ class NewCardForm extends Component {
   onSubmit = (event) => {
 
     event.preventDefault();
-    const { text, emoji } = this.state;
+    const { text } = this.state;
     console.log(event)
 
     if ( text === '' ) return;
@@ -73,7 +73,6 @@ class NewCardForm extends Component {
             {this.renderEmoji()}
           </select>
         </div>
-
 
         <div className="submit">
           <input className="new-card-form__form-button" type="submit" name="submit" value="Add a Card" />
